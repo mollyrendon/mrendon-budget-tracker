@@ -9,7 +9,6 @@ An application designed to let users keep track of their budget even when they a
 MongoDB
 Mongoose
 
-
 # Contribution
 
 Made by Molly Rendon
