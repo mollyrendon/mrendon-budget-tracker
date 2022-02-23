@@ -38,10 +38,46 @@ self.addEventListener("install", function (e) {
 
 
 /*Activate:
-
+This piece of code is a function that will run when the user activates their app.  It will first get all of the cache keys and then filter them to find only those that have APP_PREFIX in it's indexOf() method.  After filtering out the cache keys
+they are pushed into an array and returned as a promise.  The code deletes any cache key with APP_PREFIX in its indexOf() method from the caches.  
 */
+self.addEventListener("activate", function (e) {
+    e.waitUntil(
+        caches.keys().then(function (keyList) {
+            let cacheKeeplist = keyList.filter(function (key) {
+                return key.indexOf(APP_PREFIX);
+            });
+            cacheKeeplist.push(CACHE_NAME);
+
+            return Promise.all(
+                keyList.map(function (key, i) {
+                    if (cacheKeeplist.indexOf(key) === -1) {
+                        console.log("deleting cache : " + keyList[i]);
+                        return caches.delete(keyList[i]);
+                    }
+                })
+            );
+        })
+    );
+});
 
 
 /*Fetch:
-
+This piece of code is a function that is used to fetch a file from the server.  It first checks to see if the file is cached on the local machine.  If it is then the code will return that cached version of the 
+file and not make any request to the server.  
 */
+
+self.addEventListener("fetch", function (e) {
+    console.log("fetch request : " + e.request.url);
+    e.respondWith(
+        caches.match(e.request).then(function (request) {
+            if (request) {
+                console.log("responding with cache : " + e.request.url);
+                return request;
+            } else {
+                console.log("file is not cached, fetching : " + e.request.url);
+                return fetch(e.request);
+            }
+        })
+    );
+});
