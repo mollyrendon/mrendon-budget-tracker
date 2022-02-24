@@ -1,3 +1,5 @@
+<!-- Budget Tracker Main Page -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,6 +48,10 @@
   <script src="js/ibd.js"></script>
 </body>
 <script>
+  /*Service Worker Function:
+  This piece of code checks to see if the browser supports service workers.  If it does then a new service worker is registered with the name "service worker.js".  If successful an alert message is displayed in the cosonle and a service worker for the current page is registered.  
+  */
+
     (function() {
       if('serviceWork' in navigator) {
         navigator.serviceWorker

@@ -1,6 +1,8 @@
-const mongoose = require("mongoose");
+/*Required Connections*/
 
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+
 
 const transactionSchema = new Schema(
   {
