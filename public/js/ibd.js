@@ -20,7 +20,7 @@ request.onupgradeneeded = function (event) {
 
 
 /*On Success:
-
+This piece of code is a function that is called when the user clicks the button.  The event object passed to this function has an 'onsuccess' property which will be true if the request was sucessful and false otherwise.  
 */
 request.onsuccess = function (event) {
     db = event.target.result;
@@ -29,17 +29,13 @@ request.onsuccess = function (event) {
     }
 };
 
-
-/*On Error: 
-
-*/
 request.onerror = function (event) {
     console.log("Error: " + event.target.errorCode);
 };
 
 
 /*Save Record: 
-
+This piece of code saves a record to the new_budget object store.  The transaction is created with readwrite permissioins, and then the record is saved by adding it to the new_budget object store.
 */
 function saveRecord(record) {
     const transaction = db.transaction(["new_budget"], "readwrite");
@@ -51,7 +47,8 @@ function saveRecord(record) {
 
 
 /*Upload Budget: 
-
+This section of code creates a transaction in the database and stores the new budget object.  It first creates a transaction object and sets the readwrite property to be true.  The code then creates an object store called new_budget, which is stored in the transaction object.  It then
+gets all of the records from that store using getAll().  It then check if there are any results before calling fetch() with a POST request and passing in JSON data for each result.  Finally it calls .then() on response to handle success or failure.
 */
 function uploadBudget() {
     const transaction = db.transaction(["new_budget"], "readwrite");
