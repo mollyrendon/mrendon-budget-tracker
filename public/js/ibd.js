@@ -10,7 +10,8 @@ const request = indexedDB.open("budget_tracker", 1);
 
 
 /*Upgrade: 
-
+This section of code is trying to create a new object store called "new_budget" with the autoIncrement: true.  The new object store called "new_budget" will be created in the database.  The event.target.result is the target of the
+event, which is the database.  The db variable would then contain all of the information about the newly created object store, such as its name and the location within the database.  
 */
 request.onupgradeneeded = function (event) {
     const db = event.target.result;
